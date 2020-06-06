@@ -12,7 +12,7 @@ Proyecto AI Developer Senpai Academy
     
 ● Descripción de la solución inicial planteada.
 
-Se creara un bot de slack con el cual permitira a los usuarios escribir mensajes y el bot respondera con el sentimiento que predijo del mensaje recibido: positivo, negativo o neutral.
+Se creara un bot de slack con el cual permitira a los usuarios elegir entre ingles o español y escribir mensajes, el bot respondera con el sentimiento que predijo del mensaje recibido: positivo, negativo o neutral.
 
 ● Descripción inicial del algoritmo de machine learning o modelo de deep learning a
 utilizar.
