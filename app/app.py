@@ -20,7 +20,7 @@ def load_trained_model():
 
 def prepare_text(text):
     #preparo el texto para correrlo en le modelo
-    texto = [texto]
+    texto = [text]
     vectorizer = load('./vectorizer.pkl')
     new_data = vectorizer.transform(texto)
     
@@ -34,24 +34,26 @@ def predict():
     data = {"success": False}
 
     if flask.request.method == "POST":
-        if flask.request.files.get("text"):
-            # Leer el texto
-            texto = flask.request.data
-            
-            ## SOLUCIÓN
-            new_data = prepare_text(texto)
+       # if flask.request.data():
+      # Leer el texto
+      texto = flask.request.data
+      print(texto)
+      ## SOLUCIÓN
+      new_data = prepare_text(texto)
 
-            # Usar el modelo para predecir            
-            result = model.predict(new_data)
-             # Inicializar el retorno como una lista vacía
-            data["sentiment"] = []
+      # Usar el modelo para predecir            
+      result = model.predict(new_data)
+        # Inicializar el retorno como una lista vacía
+      data["sentiment"] = []
 
-            data["sentiment"].append(result)
+      data["sentiment"].append(result)
 
-            # Indicar el éxito de la operación
-            data["success"] = True
+      # Indicar el éxito de la operación
+      data["success"] = True
 
     # Contesto un JSON
+    
+    
     return flask.jsonify(data)
 
 
