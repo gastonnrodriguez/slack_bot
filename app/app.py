@@ -60,7 +60,7 @@ def predict():
     return valor
 
 
-# Comenzar la ejecución del servidor
+# Comenzar la ejecucion del servidor
 if __name__ == "__main__":
     print("Inicializando servidor")
     load_trained_model()
