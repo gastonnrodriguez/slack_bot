@@ -66,7 +66,7 @@ def predict():
 if __name__ == "__main__":
     print("Inicializando servidor")
     load_trained_model()
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=8080)
 
 
 #curl -X POST --data "hoy es una noche hermosa"" 'http://localhost:5000/predict_es'
