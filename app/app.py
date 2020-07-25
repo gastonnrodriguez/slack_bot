@@ -3,7 +3,7 @@ from joblib import dump, load
 import flask
 
 
-# Inicializar aplicación Flask
+# Inicializar aplicacion Flask
 app = flask.Flask(__name__)
 # Definir variable global para el modelo
 model = None
@@ -11,9 +11,9 @@ model = None
 
 def load_trained_model():
     print("Cargando modelo..")
-    # Cargar el modelo de Keras que editamos en el Jupyter notebook y está guardado en el archivo: vgg19_saved_model.h5
+    
     global model
-    ## SOLUCIÓN
+    
     model = load('./modelo_entrenado.pkl')    
     return model
 
@@ -45,7 +45,7 @@ def predict():
       # Leer el texto
       texto = flask.request.data
       print(texto)
-      ## SOLUCIÓN
+      
       new_data = prepare_text(texto)
 
       # Usar el modelo para predecir            
