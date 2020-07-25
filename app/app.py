@@ -55,17 +55,7 @@ def predict():
           valor = "negativo"
       elif result[0] == 1:
           valor = "positivo"
-       
-        # Inicializar el retorno como una lista vacía
-      #data["sentiment"] = []
-
-      #data["sentiment"].append(result)
-
-      # Indicar el éxito de la operación
-      #data["success"] = True
-
-    # Contesto un JSON
-    
+     
     #flask.jsonify(data)
     return valor
 
