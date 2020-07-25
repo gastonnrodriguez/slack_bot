@@ -14,13 +14,13 @@ def load_trained_model():
     
     global model
     
-    model = load('./modelo_entrenado.pkl')    
+    model = load('../modelo_entrenado.pkl')    
     return model
 
 def prepare_text(text):
     #preparo el texto para correrlo en le modelo
     texto = [text]
-    vectorizer = load('./vectorizer.pkl')
+    vectorizer = load('../vectorizer.pkl')
     new_data = vectorizer.transform(texto)
     
         # Retornar texto vectorizado
@@ -30,8 +30,10 @@ def prepare_text(text):
 @app.route("/slack_challenge", methods=["POST"])
 def answerChallenge():
     value = flask.request.json
-    print(value)
-    return "OK"
+    challenge = value["challenge"]
+    print(challenge)
+
+    return challenge
 @app.route("/predict_es", methods=["POST"])
 def predict():
     texto = flask.request.data
