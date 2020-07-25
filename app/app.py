@@ -36,8 +36,8 @@ def answerChallenge():
     return challenge
 @app.route("/predict_es", methods=["POST"])
 def predict():
-    texto = flask.request.data
-   
+    
+    valor = ""
 
     # Inicializo retornoc
     #data = {"success": False}
@@ -45,22 +45,23 @@ def predict():
     if flask.request.method == "POST":
        # if flask.request.data():
       # Leer el texto
-      texto = flask.request.data
-      texto2 = flask.request.form["text"]
-      print(texto2)
       
-      new_data = prepare_text(texto2)
+      texto = flask.request.form["text"]
+      print(texto)
+      
+      new_data = prepare_text(texto)
 
       # Usar el modelo para predecir            
       result = model.predict(new_data)
-      valor = ""
+    
       if result[0] == 0:
           valor = "negativo"
       elif result[0] == 1:
           valor = "positivo"
+
     data = {}
     data["response_type"] = "in_channel"
-    data["text"] = value
+    data["text"] = valor
     #flask.jsonify(data)
     return flask.jsonify(data)
 
