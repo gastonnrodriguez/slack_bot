@@ -14,13 +14,13 @@ def load_trained_model():
     
     global model
     
-    model = load('../modelo_entrenado.pkl')    
+    model = load('./modelo_entrenado.pkl')    
     return model
 
 def prepare_text(text):
     #preparo el texto para correrlo en le modelo
     texto = [text]
-    vectorizer = load('../vectorizer.pkl')
+    vectorizer = load('./vectorizer.pkl')
     new_data = vectorizer.transform(texto)
     
         # Retornar texto vectorizado
@@ -46,10 +46,10 @@ def predict():
        # if flask.request.data():
       # Leer el texto
       texto = flask.request.data
-      texto2 = flask.request.get_json()
+      texto2 = flask.request.form["text"]
       print(texto2)
       
-      new_data = prepare_text(texto)
+      new_data = prepare_text(texto2)
 
       # Usar el modelo para predecir            
       result = model.predict(new_data)
