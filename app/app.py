@@ -1,6 +1,5 @@
 from slack import WebClient
 from joblib import dump, load
-import pickle
 import flask
 
 
@@ -28,10 +27,18 @@ def prepare_text(text):
     return new_data
 
 
+@app.route("/slack_challenge", methods=["POST"])
+def answerChallenge():
+    value = flask.request.data
+    print(value)
+
 @app.route("/predict_es", methods=["POST"])
 def predict():
-    # Inicializo retorno
-    data = {"success": False}
+    texto = flask.request.data
+   
+
+    # Inicializo retornoc
+    #data = {"success": False}
 
     if flask.request.method == "POST":
        # if flask.request.data():
@@ -43,18 +50,24 @@ def predict():
 
       # Usar el modelo para predecir            
       result = model.predict(new_data)
+      valor = ""
+      if result[0] == 0:
+          valor = "negativo 😤"
+      elif result[0] == 1:
+          valor = "positivo 😁"
+       
         # Inicializar el retorno como una lista vacía
-      data["sentiment"] = []
+      #data["sentiment"] = []
 
-      data["sentiment"].append(result)
+      #data["sentiment"].append(result)
 
       # Indicar el éxito de la operación
-      data["success"] = True
+      #data["success"] = True
 
     # Contesto un JSON
     
-    
-    return flask.jsonify(data)
+    #flask.jsonify(data)
+    return valor
 
 
 # Comenzar la ejecución del servidor
