@@ -29,9 +29,9 @@ def prepare_text(text):
 
 @app.route("/slack_challenge", methods=["POST"])
 def answerChallenge():
-    value = flask.request.data
+    value = flask.request.json
     print(value)
-
+    return "OK"
 @app.route("/predict_es", methods=["POST"])
 def predict():
     texto = flask.request.data
@@ -64,7 +64,7 @@ def predict():
 if __name__ == "__main__":
     print("Inicializando servidor")
     load_trained_model()
-    app.run()
+    app.run(host='0.0.0.0', port=80)
 
 
 #curl -X POST --data "hoy es una noche hermosa"" 'http://localhost:5000/predict_es'
