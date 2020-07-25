@@ -52,9 +52,9 @@ def predict():
       result = model.predict(new_data)
       valor = ""
       if result[0] == 0:
-          valor = "negativo 😤"
+          valor = "negativo"
       elif result[0] == 1:
-          valor = "positivo 😁"
+          valor = "positivo"
        
         # Inicializar el retorno como una lista vacía
       #data["sentiment"] = []
