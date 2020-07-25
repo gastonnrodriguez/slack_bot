@@ -58,9 +58,11 @@ def predict():
           valor = "negativo"
       elif result[0] == 1:
           valor = "positivo"
-     
+    data = {}
+    data["response_type"] = "in_channel"
+    data["text"] = value
     #flask.jsonify(data)
-    return valor
+    return flask.jsonify(data)
 
 
 # Comenzar la ejecucion del servidor
