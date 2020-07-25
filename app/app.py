@@ -46,7 +46,8 @@ def predict():
        # if flask.request.data():
       # Leer el texto
       texto = flask.request.data
-      print(texto)
+      texto2 = flask.request.get_json()
+      print(texto2)
       
       new_data = prepare_text(texto)
 
