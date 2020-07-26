@@ -36,3 +36,9 @@ Las herramientas que utilizare son:
   -Flask
   -keras
   -scikit learn
+
+  Proyecto final:
+  Para utilizar la aplicación hay que levanta la misma en el server (EC2 de amazon) y luego en nuestros canales Slack de Senpai en el canal "Varios" se generaron 2 slash commands /predict_es para analisis de sentimientos en español y /predict_en para hacerlo en ingles:
+
+  La manera de utilizarlo es invocar /predict_es separado de un espacio y el texto que se desea analizar, ej.: /predict_es que bueno que ganamos el campeonato 
+  El resultado del analisis la aplicacion slack_bot lo posteara como un mensaje abierto para todos los usuarios.
