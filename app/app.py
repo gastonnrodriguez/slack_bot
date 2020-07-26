@@ -1,6 +1,8 @@
 from slack import WebClient
 from joblib import dump, load
-from keras.models import load_model
+from waitress import serve
+#from tensorflow.keras import load_model
+
 import flask
 
 
@@ -15,27 +17,27 @@ def load_trained_model():
     
     global model
     
-    model = load('../modelo_entrenado.pkl')    
+    model = load('./modelo_entrenado.pkl')    
     return model
 
 def prepare_text(text):
     #preparo el texto para correrlo en le modelo
     texto = [text]
-    vectorizer = load('../vectorizer.pkl')
+    vectorizer = load('./vectorizer.pkl')
     new_data = vectorizer.transform(texto)
     
         # Retornar texto vectorizado
     return new_data
 
-#CNN model
-def load_keras_model():
+""" #CNN model
+#def load_keras_model():
     print("cargando modelo keras..")
     global modelo_keras
     modelo_keras = load_model('../modelo_CNN.h5')
     modelo_keras._make_predict_function()
     print("Modelo cargado")
 
-def prepare_text_keras(text):
+#def prepare_text_keras(text):
     #preparo el texto para correrlo en le modelo
     tokenizer = load('../tokenizerCNN.pkl')
     instance = tokenizer.texts_to_sequences(text)
@@ -48,7 +50,7 @@ def prepare_text_keras(text):
     
     # Retornar texto vectorizado
     return flat_list
-
+ """
 
 @app.route("/slack_challenge", methods=["POST"])
 def answerChallenge():
@@ -88,7 +90,7 @@ def predict_es():
     #flask.jsonify(data)
     return flask.jsonify(data)
 
-@app.route("/predict_en", methods=["POST"])
+""" @app.route("/predict_en", methods=["POST"])
 def predict_en():
     
     valor = ""
@@ -118,15 +120,13 @@ def predict_en():
     data["text"] = valor
     #flask.jsonify(data)
     return flask.jsonify(data)
-
+ """
 
 
 # Comenzar la ejecucion del servidor
 if __name__ == "__main__":
     print("Inicializando servidor")
     load_trained_model()
-    load_keras_model()
-    app.run(host='0.0.0.0', port=8080)
+    #load_keras_model()
+    serve(app.run(host='0.0.0.0', port=8080))
 
-
-#curl -X POST --data "hoy es una noche hermosa"" 'http://localhost:5000/predict_es'
