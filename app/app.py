@@ -1,5 +1,6 @@
 from slack import WebClient
 from joblib import dump, load
+from keras.models import load_model
 import flask
 
 
@@ -9,13 +10,20 @@ app = flask.Flask(__name__)
 model = None
 
 
-def load_trained_model():
+def load_trained_model_():
     print("Cargando modelo..")
     
     global model
     
     model = load('./modelo_entrenado.pkl')    
     return model
+
+def load_keras_model():
+    print("cargando modelo keras..")
+    global modelo_keras
+    model = load_model('../modelo_CNN.h5')
+    model._make_predict_function()
+    print("Modelo cargado")
 
 def prepare_text(text):
     #preparo el texto para correrlo en le modelo
@@ -35,7 +43,7 @@ def answerChallenge():
 
     return challenge
 @app.route("/predict_es", methods=["POST"])
-def predict():
+def predict_es():
     
     valor = ""
 
@@ -55,15 +63,47 @@ def predict():
       result = model.predict(new_data)
     
       if result[0] == 0:
-          valor = "negativo"
+          valor = "El resultado del analisis de sentimiento es: negativo"
       elif result[0] == 1:
-          valor = "positivo"
+          valor = "El resultado del analisis de sentimiento es: positivo"
 
     data = {}
     data["response_type"] = "in_channel"
     data["text"] = valor
     #flask.jsonify(data)
     return flask.jsonify(data)
+
+@app.route("/predict_en", methods=["POST"])
+def predict_en():
+    
+    valor = ""
+
+    # Inicializo retornoc
+    #data = {"success": False}
+
+    if flask.request.method == "POST":
+       # if flask.request.data():
+      # Leer el texto
+      
+      texto = flask.request.form["text"]
+      print(texto)
+      
+      new_data = prepare_text(texto)
+
+      # Usar el modelo para predecir            
+      result = model.predict(new_data)
+    
+      if result[0] == 0:
+          valor = "Sentiment analysis result is: : negative"
+      elif result[0] == 1:
+          valor = "Sentiment analysis result is: : positive"
+
+    data = {}
+    data["response_type"] = "in_channel"
+    data["text"] = valor
+    #flask.jsonify(data)
+    return flask.jsonify(data)
+
 
 
 # Comenzar la ejecucion del servidor
